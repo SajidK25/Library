@@ -24,6 +24,8 @@ namespace Library.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("FineAmount");
+
                     b.Property<string>("StudentName");
 
                     b.HasKey("StudentID");

@@ -11,25 +11,36 @@ namespace Library
 		{
 			Console.WriteLine("*****************************************");
 			Console.WriteLine("       Welcome to library system.        ");
-			Console.WriteLine("*****************************************");
+			Console.WriteLine("*****************************************");	
+			var context = new LibraryContext();
 			LibraryDashboard();
-			Console.WriteLine("Enter your choice (1-6) :");
-			var choice = int.Parse(Console.ReadLine());
-			if (choice == 1) {
-				EntryStudent();
-			}else if (choice == 2) {
-				EntryBook();
-			} else if (choice == 3) {
-				IssueBook();
-			} else if (choice == 4) {
-				ReturnBook();
-			} else if (choice == 5) {
-				CheckFine();
-			} else if (choice == 6) {
-				ReceiveFine();
-			} else {
-				Console.WriteLine("Invalid option\nRetry !!!");
+			
+			while (true) {
+				var choice = Console.ReadLine();
+				if (String.IsNullOrWhiteSpace(choice)) {
+					break;
+				} else {
+					if (int.Parse(choice) == 1) {
+						EntryStudent(context);
+						LibraryDashboard();
+
+					} else if (int.Parse(choice) == 2) {
+						EntryBook();
+					} else if (int.Parse(choice) == 3) {
+						IssueBook();
+					} else if (int.Parse(choice) == 4) {
+						ReturnBook();
+					} else if (int.Parse(choice) == 5) {
+						CheckFine();
+					} else if (int.Parse(choice) == 6) {
+						ReceiveFine();
+					} else {
+						Console.WriteLine("Invalid option\nRetry !!!");
+					}
+				}
 			}
+			
+
 
 		}
 
@@ -44,17 +55,26 @@ namespace Library
 							"# To return a book enter: 4\n" +
 							"# To check fine, enter: 5\n" +
 							"# To receive fine, enter: 6");
+			Console.WriteLine("Enter your choice (1-6) :");
 			
-
 		}
-		public static void EntryStudent()
+		public static void EntryStudent(LibraryContext context)
 		{
+
 			Console.WriteLine("Please enter student Id: _ :");
-			var StudentId = Console.ReadLine();
+			var studentId = int.Parse(Console.ReadLine());
 			Console.WriteLine("Please enter student name: _ :");
-			var StudentName = Console.ReadLine();
+			var studentName = Console.ReadLine();
 			Console.WriteLine("Please enter fine amount: _ :");
-			var FineAmount = Console.ReadLine();
+			var fineAmount = decimal.Parse(Console.ReadLine());
+			context.Students.Add(new Student {
+				StudentID=studentId,
+				StudentName=studentName,
+				FineAmount=fineAmount
+			});
+			context.SaveChanges();
+			Console.WriteLine("Student Entry is succesful");
+
 		}
 		public static void EntryBook()
 		{

@@ -4,6 +4,6 @@
 	{
 		public int StudentID { get; set; }
 		public string StudentName { get; set; }
-		private decimal FineAmount { get; set; } = 0;
+		public decimal FineAmount { get; set; }
 	}
 }

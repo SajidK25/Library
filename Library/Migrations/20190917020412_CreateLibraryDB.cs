@@ -11,9 +11,10 @@ namespace Library.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    StudentID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    StudentName = table.Column<string>(nullable: true)
+                    StudentID = table.Column<int>(nullable: false),
+                        
+                    StudentName = table.Column<string>(nullable: true),
+                    FineAmount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

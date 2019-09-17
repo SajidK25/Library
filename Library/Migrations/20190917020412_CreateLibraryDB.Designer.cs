@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20190916183347_CreateLibraryDB")]
+    [Migration("20190917020412_CreateLibraryDB")]
     partial class CreateLibraryDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,8 @@ namespace Library.Migrations
                     b.Property<int>("StudentID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("FineAmount");
 
                     b.Property<string>("StudentName");
 
