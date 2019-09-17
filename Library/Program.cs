@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library
 {
@@ -25,11 +26,14 @@ namespace Library
 						LibraryDashboard();
 
 					} else if (int.Parse(choice) == 2) {
-						EntryBook();
+						EntryBook(context);
+						LibraryDashboard();
 					} else if (int.Parse(choice) == 3) {
-						IssueBook();
+						IssueBook(context);
+						LibraryDashboard();
 					} else if (int.Parse(choice) == 4) {
 						ReturnBook();
+						//LibraryDashboard();
 					} else if (int.Parse(choice) == 5) {
 						CheckFine();
 					} else if (int.Parse(choice) == 6) {
@@ -76,12 +80,59 @@ namespace Library
 			Console.WriteLine("Student Entry is succesful");
 
 		}
-		public static void EntryBook()
+		public static void EntryBook(LibraryContext context)
 		{
 
+			Console.WriteLine("Please enter Book Title: _ :");
+			var title = Console.ReadLine();
+			Console.WriteLine("Please enter Book Author: _ :");
+			var author = Console.ReadLine();
+			Console.WriteLine("Please enter Book Edition: _ :");
+			var edition = Console.ReadLine();
+			Console.WriteLine("Please enter Book Barcode: _ :");
+			var barcode = Console.ReadLine();
+			Console.WriteLine("Please enter Number of Copy: _ :");
+			var copyCount = int.Parse(Console.ReadLine());
+			context.Books.Add(new Book {
+				Title=title,
+				Author=author,
+				Edition=edition,
+				Barcode=barcode,
+				CopyCount=copyCount
+			});
+			context.SaveChanges();
+			Console.WriteLine("Book Entry is succesful");
+
 		}
-		public static void IssueBook()
+		public static void IssueBook(LibraryContext context)
 		{
+			Console.WriteLine("Issue to (student Id): _ :");
+			var studentId = int.Parse(Console.ReadLine());
+			Console.WriteLine("Issued Book (student Id): _ :");
+			var bookId = int.Parse(Console.ReadLine());
+			var issueDate = DateTime.Now;
+
+			var student = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
+			var book = context.Books.Where(b => b.BookId == bookId).FirstOrDefault();
+			var bookCount= context.Books
+				.Where(b => b.BookId == bookId)
+				.Select(b => b.CopyCount).ToList();
+
+			if (bookCount[0] > 0 && student.StudentID==studentId && book.BookId==bookId) {
+				
+					context.BookIssues.Add(
+					new BookIssue {
+						StudentId = studentId,
+						BookId = bookId,
+						IssueDate = issueDate
+					});
+
+					book.CopyCount -= 1;
+					context.SaveChanges();
+					Console.WriteLine("BookID :{0} has issued to StudentID :{1} Successfully!",bookId,studentId);
+				
+				
+			}
 
 		}
 		public static void ReturnBook()
