@@ -13,9 +13,6 @@ namespace Library
 		public int CopyCount { get; set; }
 		public IList<BookIssue> Students { get; set; }
 
-		public static implicit operator string(Book v)
-		{
-			throw new NotImplementedException();
-		}
+		
 	}
 }

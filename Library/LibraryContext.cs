@@ -17,7 +17,7 @@ namespace Library
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<BookIssue>()
-				.HasKey(bi => new { bi.StudentId,bi.BookId});
+				.HasKey(bi => new { bi.StudentId, bi.BookId });
 
 			builder.Entity<BookIssue>()
 				.HasOne(bi => bi.Student)
