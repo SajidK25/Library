@@ -1,10 +1,10 @@
-/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.csproj.CoreCompileInputs.cache
-/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.AssemblyInfoInputs.cache
-/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.AssemblyInfo.cs
 /Users/sajidMacPro/Projects/Library/Library/bin/Debug/netcoreapp2.1/Library.deps.json
 /Users/sajidMacPro/Projects/Library/Library/bin/Debug/netcoreapp2.1/Library.runtimeconfig.json
 /Users/sajidMacPro/Projects/Library/Library/bin/Debug/netcoreapp2.1/Library.runtimeconfig.dev.json
 /Users/sajidMacPro/Projects/Library/Library/bin/Debug/netcoreapp2.1/Library.dll
 /Users/sajidMacPro/Projects/Library/Library/bin/Debug/netcoreapp2.1/Library.pdb
+/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.csproj.CoreCompileInputs.cache
+/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.AssemblyInfoInputs.cache
+/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.AssemblyInfo.cs
 /Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.dll
 /Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.pdb
