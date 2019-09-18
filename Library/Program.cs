@@ -32,12 +32,14 @@ namespace Library
 						IssueBook(context);
 						LibraryDashboard();
 					} else if (int.Parse(choice) == 4) {
-						ReturnBook();
-						//LibraryDashboard();
+						ReturnBook(context);
+						LibraryDashboard();
 					} else if (int.Parse(choice) == 5) {
-						CheckFine();
+						//CheckFine();
+						LibraryDashboard();
 					} else if (int.Parse(choice) == 6) {
-						ReceiveFine();
+						//ReceiveFine();
+						LibraryDashboard();
 					} else {
 						Console.WriteLine("Invalid option\nRetry !!!");
 					}
@@ -117,6 +119,7 @@ namespace Library
 			var bookCount= context.Books
 				.Where(b => b.BookId == bookId)
 				.Select(b => b.CopyCount).ToList();
+			var barcode = context.Books.Where(b => b.BookId == bookId).FirstOrDefault();
 
 			if (bookCount[0] > 0 && student.StudentID==studentId && book.BookId==bookId) {
 				
@@ -124,7 +127,8 @@ namespace Library
 					new BookIssue {
 						StudentId = studentId,
 						BookId = bookId,
-						IssueDate = issueDate
+						IssueDate = issueDate,
+						Barcode= barcode.Barcode
 					});
 
 					book.CopyCount -= 1;
@@ -135,15 +139,45 @@ namespace Library
 			}
 
 		}
-		public static void ReturnBook()
+		
+		public static void ReturnBook(LibraryContext context)
+		{
+			Console.WriteLine("Return from (student Id): _ :");
+			var studentId = int.Parse(Console.ReadLine());
+			Console.WriteLine("Return Book (Barcode): _ :");
+			var barcode = Console.ReadLine();
+			var returnDate = DateTime.Now;
+
+			
+			
+			var student = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
+			var issuedBook = context.BookIssues
+				.Where(bi => bi.StudentId == studentId && bi.Barcode == barcode).FirstOrDefault();
+			var book = context.Books.Where(b => b.BookId == issuedBook.BookId).FirstOrDefault();
+
+			if (student.StudentID == studentId && issuedBook.Barcode == barcode) {
+
+				context.ReturnBooks.Add(
+				new ReturnBook {
+					StudentId = studentId,
+					Barcode=barcode,
+					BookId=issuedBook.BookId,
+					ReturnDate=returnDate
+					
+				});
+
+				book.CopyCount += 1;
+				context.SaveChanges();
+				Console.WriteLine("BookID :{0} has returned From StudentID :{1} Successfully!", issuedBook.BookId, studentId);
+
+
+			}
+		}
+		public static void CheckFine(LibraryContext context)
 		{
 
 		}
-		public static void CheckFine()
-		{
-
-		}
-		public static void ReceiveFine()
+		public static void ReceiveFine(LibraryContext context)
 		{
 
 		}
