@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Library
 {
@@ -11,5 +12,10 @@ namespace Library
 		public string Barcode { get; set; }
 		public int CopyCount { get; set; }
 		public IList<BookIssue> Students { get; set; }
+
+		public static implicit operator string(Book v)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -18,14 +18,23 @@ namespace Library
 		{
 			builder.Entity<BookIssue>()
 				.HasKey(bi => new { bi.StudentId,bi.BookId});
+
 			builder.Entity<BookIssue>()
 				.HasOne(bi => bi.Student)
-				.WithMany(b => b.Books)
+				.WithMany(s => s.Books)
 				.HasForeignKey(bi => bi.StudentId);
+
+			builder.Entity<ReturnBook>()
+				.HasKey(rb => new { rb.StudentId, rb.Barcode });
+			builder.Entity<ReturnBook>()
+				.HasOne(rb => rb.Student)
+				.WithMany(s => s.rBooks)
+				.HasForeignKey(rb => rb.StudentId);
 			base.OnModelCreating(builder);
 		}
 		public DbSet<Student> Students { get; set; }
 		public DbSet<Book> Books { get; set; }
 		public DbSet<BookIssue> BookIssues { get; set; }
+		public DbSet<ReturnBook> ReturnBooks { get; set; }
 	}
 }
