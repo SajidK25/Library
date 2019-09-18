@@ -35,10 +35,10 @@ namespace Library
 						ReturnBook(context);
 						LibraryDashboard();
 					} else if (int.Parse(choice) == 5) {
-						//CheckFine();
+						CheckFine(context);
 						LibraryDashboard();
 					} else if (int.Parse(choice) == 6) {
-						//ReceiveFine();
+						ReceiveFine(context);
 						LibraryDashboard();
 					} else {
 						Console.WriteLine("Invalid option\nRetry !!!");
@@ -175,7 +175,25 @@ namespace Library
 		}
 		public static void CheckFine(LibraryContext context)
 		{
-
+			Console.WriteLine("Total fine  of (student Id): _ :");
+	
+			var studentId = int.Parse(Console.ReadLine());
+			
+			var returnDate= context.ReturnBooks
+				.Where(rb => rb.StudentId == studentId)
+				.Select(rb => rb.ReturnDate)
+				.FirstOrDefault();
+			
+			var issueDate = context.BookIssues
+				.Where(bi => bi.StudentId == studentId)
+				.Select(bi => bi.IssueDate)
+				.FirstOrDefault();
+			var gracePeriod = 7;
+			var finePerDay = 10;
+			var totalDays = ((returnDate - issueDate).Days)-1;
+			var delays = (totalDays - gracePeriod);
+			var totalFine = delays * finePerDay;
+			Console.WriteLine("Your Total Fine is : {0} for {1} days delay",totalFine, delays);
 		}
 		public static void ReceiveFine(LibraryContext context)
 		{
