@@ -209,7 +209,23 @@ namespace Library
 		}
 		public static void ReceiveFine(LibraryContext context)
 		{
+			Console.WriteLine("Please Enter Student Id : ");
+			var studentId = int.Parse(Console.ReadLine());
 
+			Console.WriteLine("Please Enter Fine payment amount : ");
+			var paymentFineAmount = decimal.Parse(Console.ReadLine());
+
+			var CheckFine = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
+
+			var RemainingFineBalance = CheckFine.FineAmount - paymentFineAmount;
+			if (paymentFineAmount > RemainingFineBalance)
+				Console.WriteLine("Sorry!! Your Payment is greater then Balance." +
+								 "You cannot payment more then {0} TK", CheckFine.FineAmount);
+			else {
+				CheckFine.FineAmount = paymentFineAmount;
+				Console.WriteLine("Your Remaining Fine Balance is {0} Taka", RemainingFineBalance);
+				context.SaveChanges();
+			}
 		}
 	}
 }
