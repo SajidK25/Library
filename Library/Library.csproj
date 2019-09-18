@@ -24,5 +24,8 @@
     <Compile Remove="Migrations\20190917015441_CreateLibraryDB.cs" />
     <Compile Remove="Migrations\20190917015441_CreateLibraryDB.Designer.cs" />
     <Compile Remove="Migrations\20190917015806_CreateLibraryDB.cs" />
+    <Compile Remove="Migrations\20190918185434_DropCompositeKeyFromBookIssueTbl.cs" />
+    <Compile Remove="Migrations\20190918185434_DropCompositeKeyFromBookIssueTbl.Designer.cs" />
+    <Compile Remove="Migrations\20190918202251_dropCompositekeyBI.cs" />
   </ItemGroup>
 </Project>

@@ -147,12 +147,11 @@ namespace Library
 			Console.WriteLine("Return Book (Barcode): _ :");
 			var barcode = Console.ReadLine();
 			var returnDate = DateTime.Now;
-
-			
 			
 			var student = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
 			var issuedBook = context.BookIssues
-				.Where(bi => bi.StudentId == studentId && bi.Barcode == barcode).FirstOrDefault();
+				.Where(bi => bi.StudentId == studentId && bi.Barcode == barcode)
+				.FirstOrDefault();
 			var book = context.Books.Where(b => b.BookId == issuedBook.BookId).FirstOrDefault();
 
 			if (student.StudentID == studentId && issuedBook.Barcode == barcode) {
@@ -165,35 +164,48 @@ namespace Library
 					ReturnDate=returnDate
 					
 				});
+				//----------- Update Fine amount to Student table--------
+				
+				var issueDate = context.BookIssues
+					.Where(bi => bi.StudentId == studentId)
+					.Select(bi => bi.IssueDate)
+					.FirstOrDefault();
+				var gracePeriod = 7;
+				var finePerDay = 10;
+				var totalDays = ((returnDate - issueDate).Days) - 1;
+				var delays = (totalDays - gracePeriod);
+				var totalFine = delays * finePerDay;
+				if (totalDays > gracePeriod) {
 
+					student.FineAmount = totalFine;
+				} else student.FineAmount = 0;
+
+				//------ update copy count--
 				book.CopyCount += 1;
 				context.SaveChanges();
+
 				Console.WriteLine("BookID :{0} has returned From StudentID :{1} Successfully!", issuedBook.BookId, studentId);
 
 
-			}
+			} else Console.WriteLine("Invalid StudentId Or Barcode");
 		}
 		public static void CheckFine(LibraryContext context)
 		{
 			Console.WriteLine("Total fine  of (student Id): _ :");
 	
 			var studentId = int.Parse(Console.ReadLine());
+
+			var student = context.Students
+					.Where(s => s.StudentID == studentId)
+					.FirstOrDefault();
+			if (student.FineAmount>0) {
+
+				Console.WriteLine("Your Total Fine is : {0}", student.FineAmount);
+
+			} else {
+				Console.WriteLine("You dont have any fine ");
+			}		
 			
-			var returnDate= context.ReturnBooks
-				.Where(rb => rb.StudentId == studentId)
-				.Select(rb => rb.ReturnDate)
-				.FirstOrDefault();
-			
-			var issueDate = context.BookIssues
-				.Where(bi => bi.StudentId == studentId)
-				.Select(bi => bi.IssueDate)
-				.FirstOrDefault();
-			var gracePeriod = 7;
-			var finePerDay = 10;
-			var totalDays = ((returnDate - issueDate).Days)-1;
-			var delays = (totalDays - gracePeriod);
-			var totalFine = delays * finePerDay;
-			Console.WriteLine("Your Total Fine is : {0} for {1} days delay",totalFine, delays);
 		}
 		public static void ReceiveFine(LibraryContext context)
 		{
