@@ -215,14 +215,14 @@ namespace Library
 			Console.WriteLine("Please Enter Fine payment amount : ");
 			var paymentFineAmount = decimal.Parse(Console.ReadLine());
 
-			var CheckFine = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
+			var checkFine = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
 
-			var RemainingFineBalance = CheckFine.FineAmount - paymentFineAmount;
+			var RemainingFineBalance = checkFine.FineAmount - paymentFineAmount;
 			if (paymentFineAmount > RemainingFineBalance)
 				Console.WriteLine("Sorry!! Your Payment is greater then Balance." +
-								 "You cannot payment more then {0} TK", CheckFine.FineAmount);
+								 "You cannot payment more then {0} TK", checkFine.FineAmount);
 			else {
-				CheckFine.FineAmount = paymentFineAmount;
+				checkFine.FineAmount = paymentFineAmount;
 				Console.WriteLine("Your Remaining Fine Balance is {0} Taka", RemainingFineBalance);
 				context.SaveChanges();
 			}
