@@ -4,14 +4,16 @@ using Library;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20190919093536_Add_IdToBoockIssueTbl")]
+    partial class Add_IdToBoockIssueTbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,11 +44,7 @@ namespace Library.Migrations
 
             modelBuilder.Entity("Library.BookIssue", b =>
                 {
-<<<<<<< HEAD
-                    b.Property<int>("BookIssueId")
-=======
                     b.Property<int>("id")
->>>>>>> 5479e32afa059482a6b5cf19c5bdeefe97f535d6
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -58,11 +56,7 @@ namespace Library.Migrations
 
                     b.Property<int>("StudentId");
 
-<<<<<<< HEAD
-                    b.HasKey("BookIssueId");
-=======
                     b.HasKey("id");
->>>>>>> 5479e32afa059482a6b5cf19c5bdeefe97f535d6
 
                     b.HasIndex("BookId");
 

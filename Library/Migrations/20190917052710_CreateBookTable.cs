@@ -54,7 +54,8 @@ namespace Library.Migrations
                 name: "IX_BookIssues_BookId",
                 table: "BookIssues",
                 column: "BookId");
-        }
+
+		}
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {

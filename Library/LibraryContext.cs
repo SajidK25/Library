@@ -17,8 +17,13 @@ namespace Library
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			builder.Entity<BookIssue>()
 				.HasKey(bi => new { bi.StudentId, bi.BookId });
+=======
+			//builder.Entity<BookIssue>()
+			//	.HasKey(bi => new { bi.StudentId, bi.BookId });
+>>>>>>> 5479e32afa059482a6b5cf19c5bdeefe97f535d6
 
 =======
 			builder.Entity<BookIssue>()

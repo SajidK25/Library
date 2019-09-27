@@ -80,6 +80,7 @@ namespace Library
 			});
 			context.SaveChanges();
 			Console.WriteLine("Student Entry is succesful");
+			Console.WriteLine("===========================");
 
 		}
 		public static void EntryBook(LibraryContext context)
@@ -104,6 +105,7 @@ namespace Library
 			});
 			context.SaveChanges();
 			Console.WriteLine("Book Entry is succesful");
+			Console.WriteLine("===========================");
 
 		}
 		public static void IssueBook(LibraryContext context)
@@ -134,6 +136,7 @@ namespace Library
 				book.CopyCount -= 1;
 				context.SaveChanges();
 				Console.WriteLine("BookID :{0} has issued to StudentID :{1} Successfully!", bookId, studentId);
+				Console.WriteLine("=====================================================");
 
 
 			}
@@ -199,6 +202,7 @@ namespace Library
 				context.SaveChanges();
 
 				Console.WriteLine("BookID :{0} has returned From StudentID :{1} Successfully!", issuedBook.BookId, studentId);
+				Console.WriteLine("==========================================================");
 
 
 			} else Console.WriteLine("Invalid StudentId Or Barcode");
@@ -233,15 +237,35 @@ namespace Library
 			if (student.FineAmount > 0) {
 
 				Console.WriteLine("Your Total Fine is : {0}", student.FineAmount);
-
+				Console.WriteLine("===========================");
 			} else {
 				Console.WriteLine("You dont have any fine ");
+				Console.WriteLine("===========================");
 			}
 
 		}
 		public static void ReceiveFine(LibraryContext context)
 		{
+			Console.WriteLine("Please Enter Student Id : ");
+			var studentId = int.Parse(Console.ReadLine());
 
+			Console.WriteLine("Please Enter Fine payment amount : ");
+			var paymentFineAmount = decimal.Parse(Console.ReadLine());
+
+			var checkFine = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
+
+			var RemainingFineBalance = checkFine.FineAmount - paymentFineAmount;
+			if (paymentFineAmount > RemainingFineBalance) { 
+				Console.WriteLine("Sorry!! Your Payment is greater then Balance." +
+								 "You cannot payment more then {0} TK", checkFine.FineAmount);
+				Console.WriteLine("=============================================================");
+
+			} else {
+				checkFine.FineAmount = paymentFineAmount;
+				Console.WriteLine("Your Remaining Fine Balance is {0} Taka", RemainingFineBalance);
+				Console.WriteLine("=============================================");
+				context.SaveChanges();
+			}
 		}
 	}
 }
