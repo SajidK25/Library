@@ -27,5 +27,9 @@
     <Compile Remove="Migrations\20190918185434_DropCompositeKeyFromBookIssueTbl.cs" />
     <Compile Remove="Migrations\20190918185434_DropCompositeKeyFromBookIssueTbl.Designer.cs" />
     <Compile Remove="Migrations\20190918202251_dropCompositekeyBI.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Remove="Migrations\20190918202251_dropCompositekeyBI.Designer.cs" />
+>>>>>>> ea663aee0c21f45270e2bf34d1a4fe9d0d0692a6
   </ItemGroup>
 </Project>

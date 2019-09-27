@@ -7,15 +7,15 @@ namespace Library
 
 	class Program
 	{
-		
+
 		static void Main(string[] args)
 		{
 			Console.WriteLine("*****************************************");
 			Console.WriteLine("       Welcome to library system.        ");
-			Console.WriteLine("*****************************************");	
+			Console.WriteLine("*****************************************");
 			var context = new LibraryContext();
 			LibraryDashboard();
-			
+
 			while (true) {
 				var choice = Console.ReadLine();
 				if (String.IsNullOrWhiteSpace(choice)) {
@@ -45,7 +45,7 @@ namespace Library
 					}
 				}
 			}
-			
+
 
 
 		}
@@ -62,7 +62,7 @@ namespace Library
 							"# To check fine, enter: 5\n" +
 							"# To receive fine, enter: 6");
 			Console.WriteLine("Enter your choice (1-6) :");
-			
+
 		}
 		public static void EntryStudent(LibraryContext context)
 		{
@@ -71,12 +71,12 @@ namespace Library
 			var studentId = int.Parse(Console.ReadLine());
 			Console.WriteLine("Please enter student name: _ :");
 			var studentName = Console.ReadLine();
-			Console.WriteLine("Please enter fine amount: _ :");
-			var fineAmount = decimal.Parse(Console.ReadLine());
+			//Console.WriteLine("Please enter fine amount: _ :");
+			//var fineAmount = decimal.Parse(Console.ReadLine());
 			context.Students.Add(new Student {
-				StudentID=studentId,
-				StudentName=studentName,
-				FineAmount=fineAmount
+				StudentID = studentId,
+				StudentName = studentName,
+				FineAmount = 0
 			});
 			context.SaveChanges();
 			Console.WriteLine("Student Entry is succesful");
@@ -96,11 +96,11 @@ namespace Library
 			Console.WriteLine("Please enter Number of Copy: _ :");
 			var copyCount = int.Parse(Console.ReadLine());
 			context.Books.Add(new Book {
-				Title=title,
-				Author=author,
-				Edition=edition,
-				Barcode=barcode,
-				CopyCount=copyCount
+				Title = title,
+				Author = author,
+				Edition = edition,
+				Barcode = barcode,
+				CopyCount = copyCount
 			});
 			context.SaveChanges();
 			Console.WriteLine("Book Entry is succesful");
@@ -116,30 +116,30 @@ namespace Library
 
 			var student = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
 			var book = context.Books.Where(b => b.BookId == bookId).FirstOrDefault();
-			var bookCount= context.Books
+			var bookCount = context.Books
 				.Where(b => b.BookId == bookId)
 				.Select(b => b.CopyCount).ToList();
 			var barcode = context.Books.Where(b => b.BookId == bookId).FirstOrDefault();
 
-			if (bookCount[0] > 0 && student.StudentID==studentId && book.BookId==bookId) {
-				
-					context.BookIssues.Add(
-					new BookIssue {
-						StudentId = studentId,
-						BookId = bookId,
-						IssueDate = issueDate,
-						Barcode= barcode.Barcode
-					});
+			if (bookCount[0] > 0 && student.StudentID == studentId && book.BookId == bookId) {
 
-					book.CopyCount -= 1;
-					context.SaveChanges();
-					Console.WriteLine("BookID :{0} has issued to StudentID :{1} Successfully!",bookId,studentId);
-				
-				
+				context.BookIssues.Add(
+				new BookIssue {
+					StudentId = studentId,
+					BookId = bookId,
+					IssueDate = issueDate,
+					Barcode = barcode.Barcode
+				});
+
+				book.CopyCount -= 1;
+				context.SaveChanges();
+				Console.WriteLine("BookID :{0} has issued to StudentID :{1} Successfully!", bookId, studentId);
+
+
 			}
 
 		}
-		
+
 		public static void ReturnBook(LibraryContext context)
 		{
 			Console.WriteLine("Return from (student Id): _ :");
@@ -147,7 +147,11 @@ namespace Library
 			Console.WriteLine("Return Book (Barcode): _ :");
 			var barcode = Console.ReadLine();
 			var returnDate = DateTime.Now;
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> ea663aee0c21f45270e2bf34d1a4fe9d0d0692a6
 			var student = context.Students.Where(s => s.StudentID == studentId).FirstOrDefault();
 			var issuedBook = context.BookIssues
 				.Where(bi => bi.StudentId == studentId && bi.Barcode == barcode)
@@ -159,6 +163,7 @@ namespace Library
 				context.ReturnBooks.Add(
 				new ReturnBook {
 					StudentId = studentId,
+<<<<<<< HEAD
 					Barcode=barcode,
 					BookId=issuedBook.BookId,
 					ReturnDate=returnDate
@@ -166,6 +171,15 @@ namespace Library
 				});
 				//----------- Update Fine amount to Student table--------
 				
+=======
+					Barcode = barcode,
+					BookId = issuedBook.BookId,
+					ReturnDate = returnDate
+
+				});
+				//----------- Update Fine amount to Student table--------
+
+>>>>>>> ea663aee0c21f45270e2bf34d1a4fe9d0d0692a6
 				var issueDate = context.BookIssues
 					.Where(bi => bi.StudentId == studentId)
 					.Select(bi => bi.IssueDate)
@@ -192,8 +206,9 @@ namespace Library
 		public static void CheckFine(LibraryContext context)
 		{
 			Console.WriteLine("Total fine  of (student Id): _ :");
-	
+
 			var studentId = int.Parse(Console.ReadLine());
+<<<<<<< HEAD
 
 			var student = context.Students
 					.Where(s => s.StudentID == studentId)
@@ -209,11 +224,24 @@ namespace Library
 		}
 		public static void ReceiveFine(LibraryContext context)
 		{
+=======
+>>>>>>> ea663aee0c21f45270e2bf34d1a4fe9d0d0692a6
+
+			var student = context.Students
+					.Where(s => s.StudentID == studentId)
+					.FirstOrDefault();
+			if (student.FineAmount > 0) {
+
+				Console.WriteLine("Your Total Fine is : {0}", student.FineAmount);
+
+			} else {
+				Console.WriteLine("You dont have any fine ");
+			}
 
 		}
+		public static void ReceiveFine(LibraryContext context)
+		{
 
-
-
-
+		}
 	}
 }
