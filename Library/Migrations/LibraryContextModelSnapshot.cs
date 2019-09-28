@@ -42,11 +42,7 @@ namespace Library.Migrations
 
             modelBuilder.Entity("Library.BookIssue", b =>
                 {
-<<<<<<< HEAD
-                    b.Property<int>("BookIssueId")
-=======
                     b.Property<int>("id")
->>>>>>> 5479e32afa059482a6b5cf19c5bdeefe97f535d6
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -58,11 +54,7 @@ namespace Library.Migrations
 
                     b.Property<int>("StudentId");
 
-<<<<<<< HEAD
-                    b.HasKey("BookIssueId");
-=======
                     b.HasKey("id");
->>>>>>> 5479e32afa059482a6b5cf19c5bdeefe97f535d6
 
                     b.HasIndex("BookId");
 
