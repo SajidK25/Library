@@ -3623,11 +3623,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sajidMacPro/Projects/Assignment/Library/Library.csproj",
+      "projectUniqueName": "/Users/sajidMacPro/Projects/Library/Library/Library.csproj",
       "projectName": "Library",
-      "projectPath": "/Users/sajidMacPro/Projects/Assignment/Library/Library.csproj",
+      "projectPath": "/Users/sajidMacPro/Projects/Library/Library/Library.csproj",
       "packagesPath": "/Users/sajidMacPro/.nuget/packages/",
-      "outputPath": "/Users/sajidMacPro/Projects/Assignment/Library/obj/",
+      "outputPath": "/Users/sajidMacPro/Projects/Library/Library/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

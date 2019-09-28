@@ -19,3 +19,4 @@
 /Users/sajidMacPro/Projects/Assignment/Library/obj/Debug/netcoreapp2.1/Library.AssemblyInfo.cs
 /Users/sajidMacPro/Projects/Assignment/Library/obj/Debug/netcoreapp2.1/Library.dll
 /Users/sajidMacPro/Projects/Assignment/Library/obj/Debug/netcoreapp2.1/Library.pdb
+/Users/sajidMacPro/Projects/Library/Library/obj/Debug/netcoreapp2.1/Library.csprojAssemblyReference.cache
